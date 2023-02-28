@@ -1,0 +1,69 @@
+module common.db {
+
+// Annotation to indicate that an ADL type is to be
+// mapped to a database table
+struct DbTable
+{
+  // If non empty, specifies the table name in the
+  // database. Otherwise it will be derived from the
+  // name of the adl struct
+  String tableName = "";
+
+  // Indexes for the table
+  Vector<Vector<String>> indexes = [];
+
+  // Uniqueness constraints over the table
+  Vector<Vector<String>> uniquenessConstraints = [];
+
+  // Additional SQL to be run after all tables have been
+  // created
+  Vector<String> extraSql = [];
+
+  // The textual columns used to assemble a label for the row
+  // (to be shown in UIs alongside  the id)
+  Vector<String> label = [];
+};
+
+// Annotation to indicate that an ADL type is to be
+// mapped to a database view.
+struct DbView {
+
+  // If non empty, specifies the view name in the
+  // database. Otherwise it will be derived from the
+  // name of the adl struct
+  String viewName = "";
+};
+
+/// Field level annotation to override the name of the
+/// database column.
+type DbColumnName = String;
+
+/// Field or type level annotation to override the type of the
+/// database column.
+type DbColumnType = String;
+
+/// Field level annotation to indicate that that the fields
+/// contained in this field should be lifted up to the current
+/// table.
+type DbSpread = Void;
+
+/// Field level annotation to indicate that that field
+/// is part of the primary key
+type DbPrimaryKey = Void;
+
+/// A reference for a database stored value, referenced by a
+/// string primary key.
+newtype DbKey<T> = String;
+
+/// Extent a datatype for use as a database table, giving it a
+/// primary key
+struct WithId<T>
+{
+  @DbPrimaryKey
+  String id;
+
+  @DbSpread
+  T value;
+};
+
+};

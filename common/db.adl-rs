@@ -1,0 +1,11 @@
+module common.db {
+
+import adlc.config.rust.*;
+
+annotation DbKey RustCustomType {
+  "rustname" : "crate::adlcustom::DbKey",
+  "helpers" : "crate::adlcustom::DbKey",
+  "stdTraits": ["PartialEq", "Serialize", "Deserialize", "Clone", "Eq", "Hash"]
+};
+
+};

@@ -1,0 +1,11 @@
+module common.time {
+
+import common.db.DbColumnType;
+
+// Column types for postgres
+annotation Instant DbColumnType "timestamp with time zone";
+annotation LocalDate DbColumnType "date";
+annotation LocalTime DbColumnType "time";
+annotation LocalDateTime DbColumnType "timestamp";
+annotation Duration DbColumnType "interval";
+};
